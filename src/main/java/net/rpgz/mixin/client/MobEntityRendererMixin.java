@@ -28,7 +28,7 @@ public abstract class MobEntityRendererMixin<T extends MobEntity, M extends Enti
     }
 
     @Override
-    protected void setupTransforms(T entity, MatrixStack matrices, float animationProgress, float bodyYaw, float tickDelta) {
+    protected void setupTransforms(T entity, MatrixStack matrices, float animationProgress, float bodyYaw, float tickDelta, float scale) {
         if (entity.deathTime > 0) {
             this.shadowRadius = 0F;
             float f = ((float) entity.deathTime + tickDelta - 1.0F) / 20.0F * 1.6F;
@@ -45,7 +45,7 @@ public abstract class MobEntityRendererMixin<T extends MobEntity, M extends Enti
                 matrices.translate(-(double) ((entity.getHeight() / 2) * f), 0.0D, 0.0D);
             }
         }
-        super.setupTransforms(entity, matrices, animationProgress, bodyYaw, tickDelta);
+        super.setupTransforms(entity, matrices, animationProgress, bodyYaw, tickDelta, scale);
     }
 
     @Override

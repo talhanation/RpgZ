@@ -30,13 +30,13 @@ public class GameRendererMixin {
     @Shadow
     private MinecraftClient client;
 
-    @Inject(method = "updateTargetedEntity", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/profiler/Profiler;pop()V"))
-    private void updateTargetedEntityMixin(float tickDelta, CallbackInfo info) {
+    @Inject(method = "updateCrosshairTarget", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/profiler/Profiler;pop()V"))
+    private void updateCrosshairTargetMixin(float tickDelta, CallbackInfo info) {
         Entity entity = this.client.getCameraEntity();
         if (this.client.crosshairTarget.getType() == HitResult.Type.BLOCK) {
             BlockPos pos = ((BlockHitResult) this.client.crosshairTarget).getBlockPos();
             if (!this.client.world.getBlockState(pos).isFullCube(this.client.world, pos)) {
-                double reachDinstance = (double) this.client.interactionManager.getReachDistance();
+                double reachDinstance = this.client.player.getEntityInteractionRange();
                 Vec3d vec3d = this.client.player.getCameraPosVec(tickDelta);
                 Vec3d vec3d2 = this.client.player.getRotationVec(tickDelta);
                 Vec3d vec3d3 = vec3d.add(vec3d2.x * reachDinstance, vec3d2.y * reachDinstance, vec3d2.z * reachDinstance);

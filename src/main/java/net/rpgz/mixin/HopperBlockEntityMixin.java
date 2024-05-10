@@ -2,7 +2,6 @@ package net.rpgz.mixin;
 
 import java.util.Iterator;
 import java.util.List;
-import java.util.stream.IntStream;
 
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
@@ -41,10 +40,13 @@ public abstract class HopperBlockEntityMixin implements InventoryAccess {
                         if (livingEntity.isDead()) {
                             if (((InventoryAccess) livingEntity).getInventory() != null) {
                                 Direction direction = Direction.DOWN;
-                                info.setReturnValue(isInventoryEmpty(((InventoryAccess) livingEntity).getInventory(), direction) ? false
-                                        : getAvailableSlots(((InventoryAccess) livingEntity).getInventory(), direction).anyMatch((i) -> {
-                                            return extract(hopper, ((InventoryAccess) livingEntity).getInventory(), i, direction);
-                                        }));
+
+                                for (int i : getAvailableSlots(((InventoryAccess) livingEntity).getInventory(), direction)) {
+                                    if (!extract(hopper, ((InventoryAccess) livingEntity).getInventory(), i, direction)) {
+                                        continue;
+                                    }
+                                    info.setReturnValue(true);
+                                }
                             }
                         }
                     }
@@ -60,12 +62,7 @@ public abstract class HopperBlockEntityMixin implements InventoryAccess {
     }
 
     @Shadow
-    private static boolean isInventoryEmpty(Inventory inv, Direction facing) {
-        return false;
-    }
-
-    @Shadow
-    private static IntStream getAvailableSlots(Inventory inventory, Direction side) {
+    private static int[] getAvailableSlots(Inventory inventory, Direction side) {
         return null;
     }
 }

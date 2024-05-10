@@ -62,12 +62,12 @@ public abstract class MobEntityMixin extends LivingEntity implements InventoryAc
                 }
             } else
             // Water floating
-            if (this.getWorld().containsFluid(box.offset(0.0D, box.getYLength(), 0.0D))) {
+            if (this.getWorld().containsFluid(box.offset(0.0D, box.getLengthY(), 0.0D))) {
                 if (ConfigInit.CONFIG.surfacing_in_water)
                     this.setPos(this.getX(), this.getY() + 0.03D, this.getZ());
                 if (this.canWalkOnFluid(this.getWorld().getFluidState(this.getBlockPos())))
                     this.setPos(this.getX(), this.getY() + 0.03D, this.getZ());
-                else if (this.getWorld().containsFluid(box.offset(0.0D, -box.getYLength() + (box.getYLength() / 5), 0.0D)) && !ConfigInit.CONFIG.surfacing_in_water)
+                else if (this.getWorld().containsFluid(box.offset(0.0D, -box.getLengthY() + (box.getLengthY() / 5), 0.0D)) && !ConfigInit.CONFIG.surfacing_in_water)
                     this.setPos(this.getX(), this.getY() - 0.05D, this.getZ());
             }
         } else {
@@ -90,8 +90,8 @@ public abstract class MobEntityMixin extends LivingEntity implements InventoryAc
             // Has to get set on server and client
             Box newBoundingBox = new Box(this.getX() - (this.getWidth() / 3.0F), this.getY() - (this.getWidth() / 3.0F), this.getZ() - (this.getWidth() / 3.0F),
                     this.getX() + (this.getWidth() / 1.5F), this.getY() + (this.getWidth() / 1.5F), this.getZ() + (this.getWidth() / 1.5F));
-            if ((this.getDimensions(EntityPose.STANDING).height < 1.0F && this.getDimensions(EntityPose.STANDING).width < 1.0F)
-                    || (this.getDimensions(EntityPose.STANDING).width / this.getDimensions(EntityPose.STANDING).height) > 1.395F) {
+            if ((this.getDimensions(EntityPose.STANDING).height() < 1.0F && this.getDimensions(EntityPose.STANDING).width() < 1.0F)
+                    || (this.getDimensions(EntityPose.STANDING).width() / this.getDimensions(EntityPose.STANDING).height()) > 1.395F) {
                 this.setBoundingBox(newBoundingBox);
             } else {
                 this.setBoundingBox(newBoundingBox.offset(this.getRotationVector(0F, this.bodyYaw).rotateY(-30.0F)));
@@ -126,8 +126,8 @@ public abstract class MobEntityMixin extends LivingEntity implements InventoryAc
                 // New method to check if inside block
                 Box checkBox = new Box(box.maxX, box.maxY, box.maxZ, box.maxX + 0.001D, box.maxY + 0.001D, box.maxZ + 0.001D);
                 Box checkBoxTwo = new Box(box.minX, box.maxY, box.minZ, box.minX + 0.001D, box.maxY + 0.001D, box.minZ + 0.001D);
-                Box checkBoxThree = new Box(box.maxX - (box.getXLength() / 3D), box.maxY, box.maxZ - (box.getZLength() / 3D), box.maxX + 0.001D - (box.getXLength() / 3D), box.maxY + 0.001D,
-                        box.maxZ + 0.001D - (box.getZLength() / 3D));
+                Box checkBoxThree = new Box(box.maxX - (box.getLengthX() / 3D), box.maxY, box.maxZ - (box.getLengthZ() / 3D), box.maxX + 0.001D - (box.getLengthX() / 3D), box.maxY + 0.001D,
+                        box.maxZ + 0.001D - (box.getLengthZ() / 3D));
                 if (this.getWorld().isRegionLoaded(blockPos, blockPos2)) {
                     if (!this.inventory.isEmpty()
                             && (((!StreamSupport.stream(this.getWorld().getBlockCollisions(this, checkBox).spliterator(), false).allMatch(VoxelShape::isEmpty)

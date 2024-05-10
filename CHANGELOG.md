@@ -1,7 +1,6 @@
 ### Added:
-- Added SpoiledZ compat
+- 
 ### Fixed:
-- Fixed mount dismounting
-- Fixed missing drops
+- 
 ### Changed:
-- Tweaked internals
+- Updated to mc 1.20.6

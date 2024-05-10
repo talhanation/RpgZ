@@ -7,7 +7,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.screen.slot.Slot;
-import net.minecraft.sound.SoundCategory;
 import net.rpgz.init.SoundInit;
 import net.rpgz.init.TagInit;
 
@@ -73,9 +72,9 @@ public class MobEntityScreenHandler extends ScreenHandler {
         }
 
         if (rareItem) {
-            player.playSound(SoundInit.COIN_LOOT_SOUND_EVENT, SoundCategory.PLAYERS, 1F, 1F);
+            player.playSound(SoundInit.COIN_LOOT_SOUND_EVENT, 1F, 1F);
         } else {
-            player.playSound(SoundInit.LOOT_SOUND_EVENT, SoundCategory.PLAYERS, 1F, 1F);
+            player.playSound(SoundInit.LOOT_SOUND_EVENT, 1F, 1F);
         }
 
         return itemStack;
