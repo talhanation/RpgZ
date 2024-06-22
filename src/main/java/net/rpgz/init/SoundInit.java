@@ -7,8 +7,8 @@ import net.minecraft.util.Identifier;
 
 public class SoundInit {
 
-    public static final Identifier LOOT_SOUND = new Identifier("rpgz:loot");
-    public static final Identifier COIN_LOOT_SOUND = new Identifier("rpgz:coin_loot");
+    public static final Identifier LOOT_SOUND = Identifier.of("rpgz:loot");
+    public static final Identifier COIN_LOOT_SOUND = Identifier.of("rpgz:coin_loot");
 
     public static SoundEvent LOOT_SOUND_EVENT = SoundEvent.of(LOOT_SOUND);
     public static SoundEvent COIN_LOOT_SOUND_EVENT = SoundEvent.of(COIN_LOOT_SOUND);

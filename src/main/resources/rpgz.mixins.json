@@ -2,7 +2,7 @@
   "required": true,
   "minVersion": "0.8",
   "package": "net.rpgz.mixin",
-  "compatibilityLevel": "JAVA_17",
+  "compatibilityLevel": "JAVA_21",
   "mixins": [
     "MobEntityMixin",
     "HopperBlockEntityMixin",
@@ -17,7 +17,6 @@
   ],
   "client": [
     "client.LivingEntityRendererMixin",
-    "client.InGameHudMixin",
     "client.ClientWorldMixin",
     "client.GameRendererMixin",
     "client.EntityRendererMixin",
